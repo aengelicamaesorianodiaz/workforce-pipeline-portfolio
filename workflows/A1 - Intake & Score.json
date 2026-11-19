@@ -1,0 +1,378 @@
+{
+  "name": "A1 - Intake & Score",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "applicant-intake",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "89cc9e58-3bc2-4ce3-a882-752165113e11",
+      "name": "Webhook",
+      "webhookId": "db923c73-e6b8-4fd9-b239-6b592dabcaea"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appVPaaes5njfsQc9",
+          "mode": "list",
+          "cachedResultName": "Project A - Workforce Pipeline (DEMO)",
+          "cachedResultUrl": "https://airtable.com/appVPaaes5njfsQc9"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4cjlagijoVPIPP",
+          "mode": "list",
+          "cachedResultName": "Applicants",
+          "cachedResultUrl": "https://airtable.com/appVPaaes5njfsQc9/tbl4cjlagijoVPIPP"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Applicant Ref": "=APP-{{ Date.now()}}",
+            "Full Name": "={{ $json.body.full_name }}",
+            "Email": "={{ $json.body.email  }}",
+            "Phone": "={{ $json.body.phone }}",
+            "Years Experience": "={{ $json.body.years_experience }}",
+            "Source": "={{ $json.body.source }}",
+            "Resume Text": "={{ $json.body.resume_text }}",
+            "Status": "=New",
+            "AI Score": "=",
+            "Dedupe Key": "={{ $json.body.email.toLowerCase() }}|{{ $json.body.job_code }}",
+            "Job": "={{ [$('Search Job').item.json.id] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Applicant Ref",
+              "displayName": "Applicant Ref",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job",
+              "displayName": "Job",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Years Experience",
+              "displayName": "Years Experience",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Website",
+                  "value": "Website"
+                },
+                {
+                  "name": "Referral",
+                  "value": "Referral"
+                },
+                {
+                  "name": "LinkedIn",
+                  "value": "LinkedIn"
+                },
+                {
+                  "name": "Job Board",
+                  "value": "Job Board"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resume Text",
+              "displayName": "Resume Text",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Scored",
+                  "value": "Scored"
+                },
+                {
+                  "name": "Shortlisted",
+                  "value": "Shortlisted"
+                },
+                {
+                  "name": "Review",
+                  "value": "Review"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                },
+                {
+                  "name": "Hired",
+                  "value": "Hired"
+                },
+                {
+                  "name": "Needs Manual Review",
+                  "value": "Needs Manual Review"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "AI Score",
+              "displayName": "AI Score",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "AI Summary",
+              "displayName": "AI Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "AI Red Flags",
+              "displayName": "AI Red Flags",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Scored At",
+              "displayName": "Scored At",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Dedupe Key",
+              "displayName": "Dedupe Key",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Error Log",
+              "displayName": "Error Log",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Score Band",
+              "displayName": "Score Band",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "a54a2b4d-00ed-4b48-bff5-2633a545352a",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ld0nYvVEDHhHwOMX",
+          "name": "Airtable - Project A DEMO"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appVPaaes5njfsQc9",
+          "mode": "list",
+          "cachedResultName": "Project A - Workforce Pipeline (DEMO)",
+          "cachedResultUrl": "https://airtable.com/appVPaaes5njfsQc9"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblELaxgyListNgjT",
+          "mode": "list",
+          "cachedResultName": "Jobs",
+          "cachedResultUrl": "https://airtable.com/appVPaaes5njfsQc9/tblELaxgyListNgjT"
+        },
+        "filterByFormula": "={Job Code}='{{ $('Webhook').item.json.body.job_code }}'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "7576b01e-17a6-4691-ab53-8478c74f57c1",
+      "name": "Search Job",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ld0nYvVEDHhHwOMX",
+          "name": "Airtable - Project A DEMO"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Search Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        []
+      ]
+    },
+    "Search Job": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "7137ca76-3af9-49e5-8731-744672837e07",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "81faa6d44a6fd292b9599e76f78b4ea13ab9360f91cd08e63dec4774ce54d8c8"
+  },
+  "nodeGroups": [],
+  "id": "Ib6E9GfZExdon4uA",
+  "tags": []
+}
